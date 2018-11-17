@@ -1,0 +1,60 @@
+
+    <div class="main_body" id="main_body">
+        <div class="breadcrub">
+            当前位置：文章管理>文章列表
+        </div>
+        <div class="pannel">
+            <span class="sel_label">请选择文章分类：</span>
+            {{/*//下拉匡----1*/}}
+                <form method="get" action="/atc/acticle" class="form">
+                    <select name="select" id="select" class="sel_opt">
+                    {{range  .acticleType2}}
+                    {{/*下拉框判断显示*/}}
+                        <option {{if compare $.list .Acticletype}}selected="true" {{else}} {{end}}>{{.Acticletype}}</option>
+                    {{end}}
+
+                    </select>
+                </form>
+
+            <table class="common_table">
+                <tr>
+                    <th width="43%">文章标题</th>
+                    <th width="10%">文章内容</th>
+                    <th width="16%">添加时间</th>
+                    <th width="7%">阅读量</th>
+                    <th width="7%">删除</th>
+                    <th width="7%">编辑</th>
+                    <th width="10%">文章类型</th>
+                </tr>
+
+                {{/*遍历数据 下标  值        前端的接受对象*/}}
+                {{range $index,$acticle2:=.acticle2}}
+                <tr>
+                    <td>{{$acticle2.TitleName}}</td>
+                    <td><a href="/atc/acticleread?Id={{$acticle2.Id}}">查看详情</a></td>
+
+                    {{/* 时间的展示不需要添加括号*/}}
+                    <td>{{$acticle2.Time.Format "2006-01-02:15-04-05" }}</td>
+                    <td>{{$acticle2.ReadNum}}</td>
+                    <td><a href="/atc/acticledel?Id={{$acticle2.Id}}" class="dels">删除</a></td>
+                    <td><a href="/atc/acticleupdate?Id={{$acticle2.Id}}">编辑</a></td>
+                    <td>财经新闻</td>
+                </tr>
+               {{end}}
+            </table>
+
+
+            {{/*分页实现  /atc/acticle?Id={{$acticle2.Id}}  */}}
+            <ul class="pagenation">
+                <li><a href="/atc/acticle?Id=1">首页</a></li>
+                <li><a href="/atc/acticle?Id={{.pageIndex | PagingTop }}">上一页 </a> </li>
+                <li><a href="/atc/acticle?Id={{PagingDown .pageIndex .mean}}">下一页</a></li>
+                <li><a href="/atc/acticle?Id={{.mean}}">末页</a></li>
+                <li>共{{.Count}}条记录/共{{.mean}}页/当前1页</li>
+            </ul>
+        </div>
+        {{.message}}
+    </div>
+
+
+

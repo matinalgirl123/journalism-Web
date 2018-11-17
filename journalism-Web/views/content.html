@@ -1,0 +1,43 @@
+
+        <div class="main_body" id="main_body">
+        <div class="breadcrub">
+            当前位置：文章管理>文章列表>文章详情
+        </div>
+
+
+             <div class="pannel">
+                 <h3 class="review_title">文章详情</h3>
+                 <div class="form_group">
+                     <label>文章标题：</label>
+                     <p class="detail"><b>{{.acticle2.TitleName}}</b></p>
+                 </div>
+                 <div class="form_group">
+                     <label>文章类型：</label>
+                     <p class="detail">{{.acticleType2.Acticletype}}</p>
+                 </div>
+                 <div class="form_group">
+                     <label>文章内容：</label>
+                     <p class="detail"><img src="{{.acticle2.Aimg}}">{{.acticle2.Content}}</p>
+                 </div>
+                 <div class="form_group">
+                     <label>阅读次数：</label>
+                     <p class="detail">{{.acticle2.ReadNum}}</p>
+                 </div>
+                 <div class="form_group">
+                     <label>最近浏览：</label>
+
+                     {{/*/    /第一种 多对多查询  重复显示   */}}
+                     {{/*<p class="detail">{{range .acticle2.User2}}{{.UserName}} |{{end}}</p>*/}}
+                     {{/*/    /第二种 多对多查询     */}}
+                     <p class="detail">{{range .User2}}{{.UserName}} |{{end}}</p>
+                 </div>
+                 <div class="form_group">
+                     <label>创建时间：</label>
+                     <p class="detail">{{.acticle2.Time.Format "2006-01-02:15-04-05"}}</p>
+                     <span>{{.message}}</span>
+                 </div>
+             </div>
+
+    </div>
+
+
